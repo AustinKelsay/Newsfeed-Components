@@ -112,3 +112,51 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+let componentCreator = (dataset) => {
+    // Create our div container and give it a class
+    let div = document.createElement('div');
+    div.classList.add("article")
+    // Create our h2 and creating a text node for it with dataset.title
+    let h2 = document.createElement('h2');
+    let header = document.createTextNode(dataset.title)
+    h2.appendChild(header);
+    // put the h2 inside of our div
+    div.prepend(h2);
+    //Create our first p element and give it a class and value
+    let p = document.createElement('p');
+    p.classList.add("date")
+    p.textContent = dataset.date;
+    // Put our p inside of div
+    div.append(p);
+    //Create our three seperate p elements and addign correct content
+    let p1 = document.createElement('p');
+    p1.textContent = dataset.firstParagraph
+    let p2 = document.createElement('p');
+    p2.textContent = dataset.secondParagraph;
+    let p3 = document.createElement('p');
+    p3.textContent = dataset.thirdParagraph;
+    // Add our three p elements to the end of div
+    div.append(p1, p2, p3);
+    // Create our span element and give it a class and text
+    let span = document.createElement('span');
+    span.classList.toggle("expandButton")
+    span.textContent = 'Expand';
+    //Adds event listener to span
+    span.addEventListener('click', () => {
+    div.classList.toggle('article-open');
+    })
+    //adds span to div
+    div.append(span);
+    //returns the component
+    return div;
+}
+
+const articles = document.querySelector('.articles');
+
+data.forEach(element => {
+ articles.appendChild(componentCreator(element))
+});
+
+
+
+
